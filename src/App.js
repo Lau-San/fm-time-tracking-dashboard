@@ -1,56 +1,35 @@
 // import './App.css'
+import { useState } from 'react'
 import Profile from './components/Profile'
 import TimeTracker from './components/TimeTracker'
+import data from './data.json'
 
 export default function App() {
+	const [trackers, setTrackers] = useState(data)
+	const [view, setView] = useState('weekly')
+
+	const trackerElems = trackers.map(tracker => (
+		<TimeTracker
+			key={tracker.title}
+			title={tracker.title}
+			view={view}
+			timeframes={tracker.timeframes}
+			hours={tracker.timeframes[view].current}
+		/>
+	))
+
 	return (
-		<div className="App">
-			<div>
-				<Profile />
-				<TimeTracker />
-				<TimeTracker />
-				<TimeTracker />
-				<TimeTracker />
-				<TimeTracker />
-				<TimeTracker />
+		<div className="bg-neutral-900 min-h-screen flex justify-center items-center">
+			<div
+				className="
+					grid gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4
+					w-4/5 min-w-75 max-w-[56rem]
+					my-16
+				"
+			>
+				<Profile selectedView={view} setView={setView} />
+				{trackerElems}
 			</div>
-			Report for Jeremy Robson Daily Weekly Monthly Work 5hrs{' '}
-			{/* daily */}
-			Previous - 7hrs {/* daily */}
-			32hrs {/* weekly */}
-			Previous - 36hrs {/* weekly */}
-			103hrs {/* monthly */}
-			Previous - 128hrs {/* monthly */}
-			Play 1hr {/* daily */}
-			Previous - 2hrs {/* daily */}
-			10hrs {/* weekly */}
-			Previous - 8hrs {/* weekly */}
-			23hrs {/* monthly */}
-			Previous - 29hrs {/* monthly */}
-			Study 0hrs {/* daily */}
-			Previous - 1hr {/* daily */}
-			4hrs {/* weekly */}
-			Previous - 7hrs {/* weekly */}
-			13hrs {/* monthly */}
-			Previous - 19hrs {/* monthly */}
-			Exercise 1hr {/* daily */}
-			Previous - 1hr {/* daily */}
-			4hrs {/* weekly */}
-			Previous - 5hrs {/* weekly */}
-			11hrs {/* monthly */}
-			Previous - 18hrs {/* monthly */}
-			Social 1hr {/* daily */}
-			Previous - 3hrs {/* daily */}
-			5hrs {/* weekly */}
-			Previous - 10hrs {/* weekly */}
-			21hrs {/* monthly */}
-			Previous - 23hrs {/* monthly */}
-			Self Care 0hrs {/* daily */}
-			Previous - 1hr {/* daily */}
-			2hrs {/* weekly */}
-			Previous - 2hrs {/* weekly */}
-			7hrs {/* monthly */}
-			Previous - 11hrs {/* monthly */}
 		</div>
 	)
 }

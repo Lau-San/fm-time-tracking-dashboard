@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	:root {
+		font-size: 18px;
+	}
+}
+
+@layer utilities {
+	.debug {
+		border: 1px solid red;
+		background-color: rgba(255, 0, 0, 0.2);
+	}
+
+	.debug-children > * {
+		border: 1px solid blue;
+		background-color: rgba(0, 0, 255, 0.2);
+	}
+}
